@@ -108,3 +108,27 @@ These two dimensions of new instances are controlled, respectively, by the insta
     e) Targeted instance placement
     f) Automatic instance placement
     g) Add capacity using an allocation request
+
+35. An AMI defines the initial software state of the instance, both OS and applications. There are four sources of AMIs:        a) AWS published generic OSs,
+    b) partner-published AMIs in the AWS Marketplace with software packages preinstalled,
+    c) customer-generated AMIs from existing Amazon EC2 instances,
+    d) and uploaded AMIs from virtual servers. 
+
+36. Spot Instances are a very cost-effective way to address temporary compute needs that are not urgent and are tolerant of interruption.
+
+37. Reserved Instances are inappropriate for temporary workloads.
+
+38. On-Demand Instances are good for temporary workloads, but don’t offer the cost savings of Spot Instances.
+
+39. Windows Instance: 
+    a) The Amazon EC2 instance ID will be assigned by AWS as part of the launch process.
+    b) The administrator password is assigned by AWS and encrypted via the public key.
+    c) The instance type defines the virtual hardware and the AMI defines the initial software state. You must specify both upon launch.
+
+40. You can change the instance type only within the same instance type family, or you can change the Availability Zone. You cannot change the operating system nor the instance type family.
+
+41. Instance stores are low-durability, high-IOPS storage that is included for free with the hourly cost of an instance.
+
+42. A short period of heavy traffic is exactly the use case for the bursting nature of general-purpose SSD volumes—the rest of the day is more than enough time to build up enough IOPS credits to handle the nightly task. Instance stores are not durable, magnetic volumes cannot provide enough IOPS, and to set up a Provisioned IOPS SSD volume to handle the peak would mean spending money for more IOPS than you need.
+
+43. There is a very small hourly charge for allocated elastic IP addresses that are not associated with an instance.

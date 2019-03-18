@@ -1,0 +1,121 @@
+1. Amazon VPC is the networking layer for Amazon Elastic Compute Cloud (Amazon EC2), and it allows you to build your own virtual network within AWS. You control various aspects of your Amazon VPC, including selecting your own IP address range; creating your own subnets ; and configuring your own route tables, network gateways, and security settings. Within a region you can create multiple Amazon VPCs, and each Amazon VPC is logically isolated even if it shares its IP address space. 
+
+2. AWS accounts that support EC2-VPC will have a default VPC created in each region with a default subnet created in each Availability Zone. The assigned CIDR block of the VPC will be 172.31.0.0/16. 
+
+3. An Amazon VPC consists of the following components:
+    a) Subnets
+    b) Route tables
+    c) Dynamic Host Configuration Protocol (DHCP) option sets
+    d) Security groups
+    e) Network Access Control Lists (ACLs)
+An Amazon VPC has the following optional components:
+    a) Internet Gateways (IGWs)
+    b) Elastic IP (EIP) addresses
+    c) Elastic Network Interfaces (ENIs)
+    d) Endpoints
+    e) Peering Network Address Translation (NATs) instances and NAT gateways
+    f) Virtual Private Gateway (VPG), Customer Gateways (CGWs), and Virtual Private Networks (VPNs) 
+
+4. Subnets reside within one Availability Zone and cannot span zones. This is an important point that can come up in the exam, so remember that one subnet equals one Availability Zone. You can, however, have multiple subnets in one Availability Zone.
+
+5. Subnets can be classified as public, private, or VPN-only.
+
+6. A route table’s routes are what permit Amazon EC2 instances within different subnets within an Amazon VPC to communicate with each other. You can modify route tables and add your own custom routes. You can also use route tables to specify which subnets are public (by directing Internet traffic to the IGW) and which subnets are private (by not having a route that directs traffic to the IGW).
+
+7. You should remember the following points about route tables:
+    a) Your VPC has an implicit router.
+    b) Your VPC automatically comes with a main route table that you can modify.
+    c) You can create additional custom route tables for your VPC.
+    d) Each subnet must be associated with a route table, which controls the routing for the subnet. If you don’t explicitly associate a subnet with a particular route table, the subnet uses the main route table.
+    e) You can replace the main route table with a custom table that you’ve created so that each new subnet is automatically associated with it.
+    f) Each route in a table specifies a destination CIDR and a target; for example, traffic destined for 172.16.0.0/12 is targeted for the VPG. AWS uses the most specific route that matches the traffic to determine how to route the traffic. 
+
+8. You must do the following to create a public subnet with Internet access:
+    a) Attach an IGW to your Amazon VPC.
+    b) Create a subnet route table rule to send all non-local traffic (0.0.0.0/0) to the IGW.
+    c) Configure your network ACLs and security group rules to allow relevant traffic to flow to and from your instance.
+You must do the following to enable an Amazon EC2 instance to send and receive traffic from the Internet:
+    Assign a public IP address or EIP address. 
+
+9. AWS automatically creates and associates a DHCP option set for your Amazon VPC upon creation and sets two options: domain-name-servers (defaulted to AmazonProvidedDNS) and domain-name (defaulted to the domain name for your region). 
+
+10. Elastic IPs
+    a) You must first allocate an EIP for use within a VPC and then assign it to an instance. 
+    b) EIPs are specific to a region (that is, an EIP in one region cannot be assigned to an instance within an Amazon VPC in a c) different region).
+    d) There is a one-to-one relationship between network interfaces and EIPs.
+    e) You can move EIPs from one instance to another, either in the same Amazon VPC or a different Amazon VPC within the same region.
+    f) EIPs remain associated with your AWS account until you explicitly release them.
+    g) There are charges for EIPs allocated to your account, even when they are not associated with a resource. 
+
+11. An elastic network interface (referred to as a network interface in this documentation) is a logical networking component in a VPC that represents a virtual network card.
+A network interface can include the following attributes:
+    A primary private IPv4 address from the IPv4 address range of your VPC
+    One or more secondary private IPv4 addresses from the IPv4 address range of your VPC
+    One Elastic IP address (IPv4) per private IPv4 address
+    One public IPv4 address
+    One or more IPv6 addresses
+    One or more security groups
+    A MAC address
+    A source/destination check flag
+    A description
+
+12. Here are the important points to understand about peering 
+    a) You cannot create a peering connection between Amazon VPCs that have matching or overlapping CIDR blocks.
+    b) You cannot create a peering connection between Amazon VPCs in different regions.
+    c) Amazon VPC peering connections do not support transitive routing.
+    d) You cannot have more than one peering connection between the same two Amazon VPCs at the same time. 
+
+Here are the important points to understand about security groups 
+    a) You can create up to 2500 security groups for each Amazon VPC.
+    b) You can add up to 60 inbound and 60 outbound rules to each security group. If you need to apply more than 100 rules to an instance, you can associate up to five security groups with each network interface.
+    c) You can specify allow rules, but not deny rules. This is an important difference between security groups and ACLs.
+    d) You can specify separate rules for inbound and outbound traffic.
+        1) By default, no inbound traffic is allowed until you add inbound rules to the security group.
+        2) By default, new security groups have an outbound rule that allows all outbound traffic. You can remove the rule and add outbound rules that allow specific outbound traffic only.
+    e) Security groups are stateful. This means that responses to allowed inbound traffic are allowed to flow outbound regardless of outbound rules and vice versa. This is an important difference between security groups and network ACLs. f) Instances associated with the same security group can’t talk to each other unless you add rules allowing it (with the exception being the default security group).
+    g) You can change the security groups with which an instance is associated after launch, and the changes will take effect immediately. 
+
+13. Diff between Security Group and Network ACL.
+1. 
+    a) Security Group: Operates at the instance level (first layer of defense).
+    b) NACL: Operates at subne level (second layer fo defense).
+2. 
+    a) Security Group: Supports allow rules only.
+    b) NACL: Supports allow rules and deny rules.
+3. 
+    a) Security Group: Its stateful, return traffic is automatically allowed regardless of any rules.
+    b) NACL: Stateless, Return traffic must be explicitly allowed by rules.
+4. 
+    a) Security Group: AWS evaluates all the rules before deciding whether to allow traffic.
+    b) NACL: AWS process rules in number order when deciding whether to allow traffic.
+5. 
+    a) Security Group: Applied selectively to individual instances.
+    b) NACL: Automatically applied to all the instances in the associated subnets; this is a backup layer of defense, so you don't have to rely on someone specifying the security group.
+
+14. A NAT gateway supports the following protocols: TCP, UDP, and ICMP.
+    A NAT gateway cannot be accessed by a ClassicLink connection associated with your VPC.
+
+15. The VPG is the AWS end of the VPN tunnel. 
+    The VPN connection consists of two tunnels for higher availability to the VPC. 
+
+16. The minimum size subnet that you can have in an Amazon VPC is /28.
+    The maximum size subnet that you can have in a VPC is /16.
+
+17. When you create an Amazon VPC, a route table is created by default. You must manually create subnets and an IGW. 
+
+18. When you provision an Amazon VPC, all subnets can communicate with each other by default. 
+
+19. A DHCP option set allows customers to define DNS servers for DNS name resolution,establish domain names for instances within an Amazon VPC, define NTP servers, and define the NetBIOS name servers. 
+
+20. A CGW is the customer side of a VPN connection, and an IGW connects a network to the Internet. A VPG is the Amazon side of a VPN connection. 
+
+21. The default limit for the number of Amazon VPCs that a customer may have in a region is 5. 
+
+22. IPsec is the security protocol supported by Amazon VPC. 
+
+23. An Amazon VPC endpoint enables you to create a private connection between your Amazon VPC and another AWS service without requiring access over the Internet or through a NAT device, VPN connection, or AWS Direct Connect. 
+
+24. Attaching an ENI associated with a different subnet to an instance can make the instance dual-homed. 
+
+25. You create a new VPC in US-East-1 and provision three subnets inside this Amazon VPC. Then All subnets will be able to communicate with each other by default.
+

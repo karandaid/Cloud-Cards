@@ -1,0 +1,61 @@
+1. Amazon Elastic Block Store (Amazon EBS) provides block level storage volumes for use with EC2 instances.
+
+2. EBS volumes are highly available and reliable storage volumes that can be attached to any running instance that is in the same Availability Zone. EBS volumes that are attached to an EC2 instance are exposed as storage volumes that persist independently from the life of the instance.
+
+3. Amazon EBS is recommended when data must be quickly accessible and requires long-term persistence.
+
+4. Amazon EBS volume is automatically replicated within its Availability Zone to protect you from component failure, offering high availability and durability. 
+
+5. Multiple Amazon EBS volumes can be attached to a single Amazon EC2 instance, although a volume can only be attached to a single instance at a time. 
+
+6. Types of Amazon EBS volumes
+    GP2 - General Purpose 2
+    IO1 - Provisioned IOPS
+    ST1 - Throughput Optimized
+    SC1 - Cold HDD
+    Standard - Magnetic
+
+    Definitions:
+    a) Magnetic Volumes: Magnetic volumes have the lowest performance characteristics of all Amazon EBS volume types. As such, they cost the lowest per gigabyte. They are an excellent, cost-effective solution for appropriate workloads. 
+
+    b) General-Purpose SSD: General-purpose SSD volumes offer cost-effective storage that is ideal for a broad range of workloads. They deliver strong performance at a moderate price point that is suitable for a wide range of workloads. 
+
+    c) Provisioned IOPS SSD: Provisioned IOPS SSD volumes are designed to meet the needs of I/O-intensive workloads, particularly database workloads that are sensitive to storage performance and consistency in random access I/O throughput. While they are the most expensive Amazon EBS volume type per gigabyte, they provide the highest performance of any Amazon EBS volume type in a predictable manner. 
+
+    d) Throughput Optimized HDD: Throughput Optimized HDD (st1) volumes provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS. This volume type is a good fit for large, sequential workloads such as Amazon EMR, ETL, data warehouses, and log processing. Bootable st1 volumes are not supported. Throughput Optimized HDD (st1) volumes, though similar to Cold HDD (sc1) volumes, are designed to support frequently accessed data.
+
+    e) Cold HDD: Cold HDD (sc1) volumes provide low-cost magnetic storage that defines performance in terms of throughput rather than IOPS. With a lower throughput limit than st1, sc1 is a good fit ideal for large, sequential cold-data workloads. If you require infrequent access to your data and are looking to save costs, sc1 provides inexpensive block storage. Bootable sc1 volumes are not supported.
+
+7. Which instance types offer NVMe instance storage?
+    High I/O instances use NVMe based local instance storage to deliver very high, low latency, I/O capacity to applications, and are optimized for applications that require millions of IOPS.
+
+8. What happens to my data when a system terminates?
+    The data stored on a local instance store will persist only as long as that instance is alive. However, data that is stored on an Amazon EBS volume will persist independently of the life of the instance. Therefore, we recommend that you use the local instance store for temporary data and, for data requiring a higher level of durability, we recommend using Amazon EBS volumes or backing up the data to Amazon S3. If you are using an Amazon EBS volume as a root partition,you will need to set the Delete On Terminate flag to "N" if you want your Amazon EBS volume to persist outside the life of the instance.
+
+9. ST1 volumes are backed by hard disk drives (HDDs) and are ideal for frequently accessed, throughput intensive workloads with large datasets and large I/O sizes, such as MapReduce, Kafka, log processing, data warehouse, and ETL workloads. 
+
+10. SC1 volumes are backed by hard disk drives (HDDs) and provides the lowest cost per GB of all EBS volume types. It is ideal for less frequently accessed workloads with large, cold datasets.
+
+11. Amazon EBS includes two major categories of storage:
+    a) SSD-backed storage for transactional workloads (performance depends primarily on IOPS)
+    b) HDD-backed storage for throughput workloads (performance depends primarily on throughput, measured in MB/s).
+
+12. SSD-backed volumes include Provisioned IOPS SSD (io1) and General Purpose SSD (gp2).
+
+13. HDD-backed volumes are designed for throughput-intensive and big-data workloads, large I/O sizes, and sequential I/O patterns. HDD-backed volumes include Throughput Optimized HDD (st1) and Cold HDD (sc1).
+
+14. You can take snapshots in many ways:
+    a) Through the AWS Management Console
+    b) Through the CLI
+    c) Through the API
+    d) By setting up a schedule of regular snapshots
+
+15. Data for the snapshot is stored using Amazon S3 technology. The action of taking a snapshot is free. You pay only the storage costs for the snapshot data. 
+
+16. It is a best practice to initialize a volume created from a snapshot by accessing all the blocks in the volume. 
+
+17. Snapshots can also be used to increase the size of an Amazon EBS volume. To increase the size of an Amazon EBS volume, take a snapshot of the volume, then create a new volume of the desired size from the snapshot. Replace the original volume with the new volume. 
+
+18. The volume can then be attached as a data volume to another instance and the data read and recovered. 
+
+19. 

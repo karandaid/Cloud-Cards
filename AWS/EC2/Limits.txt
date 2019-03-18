@@ -1,0 +1,4 @@
+Elastic IP addresses for EC2-Classic            =   5
+Security groups for EC2-Classic per instance	=   5
+Key pairs	                                    =   5000
+Placement groups	                            =   500
