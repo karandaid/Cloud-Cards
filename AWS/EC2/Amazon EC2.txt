@@ -1,0 +1,110 @@
+1. Amazon EC2 => Amazon Elastic Compute Cloud
+
+2. Amazon EC2 presents a true virtual computing environment, allowing organizations to launch compute resources with a variety of operating systems, load them with custom applications, and manage network access permissions while maintaining complete control. 
+
+3. Amazon EC2 allows organizations to obtain and configure virtual servers in Amazon’s data centers and to harness those resources to build and host software systems. Organizations can select from a variety of operating systems and resource configurations (memory, CPU, storage, and so on).
+
+4. Amazon EC2 allows you to acquire compute through the launching of virtual servers called instances. There are two concepts that are key to launching instances on AWS:
+    (1) the amount of virtual hardware dedicated to the instance and
+    (2) the software loaded on the instance.
+These two dimensions of new instances are controlled, respectively, by the instance type and the AMI. 
+
+5. There are dozens of instance types available, varying in the following dimensions:
+    a) Virtual CPUs (vCPUs)
+    b) Memory
+    c) Storage (size and type)
+    d) Network performance 
+
+6. Instance Type Families 
+    a) c4: Compute optimized For workloads requiring significant processing
+    b) r3: Memory optimized For memory-intensive workloads
+    c) i2: Storage optimized For workloads requiring high amounts of fast SSD storage
+    d) g2: GPU-based instances Intended for graphics and general-purpose GPU compute workloads 
+
+7. The Amazon Machine Image (AMI) defines the initial software that will be on an instance when it is launched. An AMI includes the following:
+    a) A template for the root volume for the instance (for example, an operating system, an application server, and applications)
+    b) Launch permissions that control which AWS accounts can use the AMI to launch instances
+    c) A block device mapping that specifies the volumes to attach to the instance when it's launched
+
+8. There are several ways that an instance may be addressed over the web upon creation: 
+    a) Public Domain Name System (DNS) Name 
+    b) Public IP 
+    c) Elastic IP 
+
+9. AWS stores the public key, and the private key is kept by the customer. The private key is essential to acquiring secure access to an instance for the first time. 
+
+10. AWS allows you to control traffic in and out of your instances through virtual firewalls called security groups.
+
+11. Security groups allow you to control traffic based on port, protocol, and source/destination. 
+
+12. Type of Security Group 
+    a) EC2-Classic Security Groups: Control outgoing instance traffic
+    b) VPC Security Groups:         Control outgoing and incoming instance traffic 
+
+13. Every instance must have at least one security group but can have more. 
+
+==================
+ VM Import/Export
+==================
+14. You can only export previously imported Amazon EC2 instances. Instances launched within AWS from AMIs cannot be exported. 
+
+15. VM Import/Export enables you to easily import virtual machine images from your existing environment to Amazon EC2 instances and export them back to your on-premises environment.
+
+16. VM Import/Export is available at no additional charge beyond standard usage charges for Amazon EC2 and Amazon S3.
+
+=================
+ Pricing Options
+=================
+27. Pricing Options
+    a) On-Demand Instances: Pay, by the second, for the instances that you launch.
+    b) Reserved Instances: Purchase, at a significant discount, instances that are always available, for a term from one to three years.
+        1) All upfront
+        2) Partial upfront
+        3) No upfront
+    c) Spot Instances: Request unused EC2 instances, which can lower your Amazon EC2 costs significantly.
+    d) Scheduled Instances: Purchase instances that are always available on the specified recurring schedule, for a one-year term.
+    e) Dedicated Hosts: Pay for a physical host that is fully dedicated to running your instances, and bring your existing per-socket, per-core, or per-VM software licenses to reduce costs.
+    f) Dedicated Instances: Pay, by the hour, for instances that run on single-tenant hardware.
+    g) Capacity Reservations: Reserve capacity for your EC2 instances in a specific Availability Zone for any duration.
+
+28. You can modify your whole reservation, or just a subset, in one or more of the following ways:
+    a) Switch Availability Zones within the same region.
+    b) Change between EC2-VPC and EC2-Classic.
+    c) Change the instance type within the same instance family (Linux instances only). 
+
+29. Spot instances are recommended for:
+    a) Applications that have flexible start and end times
+    b) Applications that are only feasible at very low compute prices
+    c) Users with urgent computing needs for large amounts of additional capacity
+
+30. On-Demand instances are recommended for:
+    a) Users that prefer the low cost and flexibility of Amazon EC2 without any up-front payment or long-term commitment
+    b) Applications with short-term, spiky, or unpredictable workloads that cannot be interrupted
+    c) Applications being developed or tested on Amazon EC2 for the first time
+
+31. Reserved Instances are recommended for:
+    a) Applications with steady state usage
+    b) Applications that may require reserved capacity
+    c) Customers that can commit to using EC2 over a 1 or 3 year term to reduce their total computing costs
+
+==================
+ Tenancy Options
+==================
+32. AWS Tenancy Options
+    a) Shared: default tenancy model for all Amazon EC2 instances, regardless of instance type, pricing model, and so forth.
+    b) Dedicated Instance Run on hardware that’s dedicated to a single customer. As a customer runs more Dedicated Instances, more underlying hardware may be dedicated to their account. 
+    c) Dedicated Hosts: An Amazon EC2 Dedicated Host is a physical server with Amazon EC2 instance capacity fully dedicated to a single customer’s use.
+
+33. Dedicated Instances:
+    a) Enables the use of dedicated physical servers
+    b) Per instance billing (subject to a $2 per region fee)
+    c) Automatic instance placement
+
+34. Dedicated Hosts
+    a) Enables the use of dedicated physical servers
+    b) Per host billing
+    c) Visibility of sockets, cores, host ID
+    d) Affinity between a host and instance
+    e) Targeted instance placement
+    f) Automatic instance placement
+    g) Add capacity using an allocation request

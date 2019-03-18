@@ -1,0 +1,14 @@
+1. An instance store (sometimes referred to as ephemeral storage ) provides temporary block-level storage for your instance. This storage is located on disks that are physically attached to the host computer. An instance store is ideal for temporary storage of information that changes frequently, such as buffers, caches, scratch data, and other temporary content, 
+
+2. You can specify instance store volumes for an instance only when you launch it.
+
+3. You can't detach an instance store volume from one instance and attach it to a different instance.
+
+4. Data in the instance store is lost when:
+    a) The underlying disk drive fails.
+    b) The instance stops (the data will persist if an instance reboots).
+    c) The instance terminates. 
+Therefore, do not rely on instance store for valuable, long-term data. Instead, use more durable data storage, such as Amazon S3, Amazon EBS, or Amazon EFS.
+
+5. If you create an AMI from an instance, the data on its instance store volumes isn't preserved and isn't present on the instance store volumes of the instances that you launch from the AMI.
+

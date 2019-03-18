@@ -1,0 +1,1 @@
+1. Data durability and availability are related but slightly different concepts. Durability addresses the question, “Will my data still be there in the future?” Availability addresses the question, “Can I access my data right now?” Amazon S3 is designed to provide both very high durability and very high availability for your data. 

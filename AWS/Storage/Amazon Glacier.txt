@@ -1,0 +1,17 @@
+1. Amazon Glacier is another cloud storage service related to Amazon S3, but optimized for data archiving and long-term backup at extremely low cost. Amazon Glacier is suitable for “cold data,” which is data that is rarely accessed and for which a retrieval time of three to five hours is acceptable. Amazon Glacier can be used both as a storage class of Amazon S3, and as an independent archival storage service. 
+
+2. Amazon Glacier is similar to Amazon S3, but it differs in several key aspects.
+    a) Amazon Glacier supports 40TB archives versus 5TB objects in Amazon S3.
+    b) Archives in Amazon Glacier are identified by system-generated archive IDs, while Amazon S3 lets you use “friendly” key names.
+    c) Amazon Glacier archives are automatically encrypted, while encryption at rest is optional in Amazon S3.
+    d) However, by using Amazon Glacier as an Amazon S3 storage class together with object lifecycle policies, you can use the Amazon S3 interface to get most of the benefits of Amazon Glacier without learning a new interface. 
+
+3. Multipart upload can be used to upload large objects, and Range GET s can be used to download portions of an Amazon S3 object or Amazon Glacier archive. 
+
+4. Server access logs can be enabled on a bucket to track requestor, object, action, and response. 
+
+5. Amazon Glacier can be used as a standalone service or as a storage class in Amazon S3. 
+
+6. Amazon Glacier stores data in archives, which are contained in vaults. You can have up to 1,000 vaults, and each vault can store an unlimited number of archives. 
+
+7. Amazon Glacier vaults can be locked for compliance purposes. 

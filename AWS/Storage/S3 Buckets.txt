@@ -1,0 +1,118 @@
+1. Amazon S3 is one of first services introduced by AWS.
+
+2. Amazon S3 can be used alone or in conjunction with other AWS services, and it offers a very high level of integration with many other AWS cloud services. 
+
+For example,
+    a) Amazon S3 serves as the durable target storage for Amazon Kinesis and Amazon Elastic MapReduce (Amazon EMR).
+    b) Amazon S3 used as the storage for Amazon Elastic Block Store (Amazon EBS) and Amazon Relational Database Service (Amazon RDS) snapshots.
+    c) Amazon S3 used as a data staging or loading storage mechanism for Amazon Redshift and Amazon DynamoDB.
+
+3. Common Use cases for Amazon S3
+    a) Backup and archive for on-premises or cloud data
+    b) Content, media and software storage and distribution
+    c) Big data analytics
+    d) Static website hosting
+    e) Cloud-native mobile and Internet application hosting
+    f) Disaster recovery
+
+4. Amazon S3 offers a range of storage classes designed for various generic use cases:
+    a) General Purpose
+    b) Infrequent Access
+    c) Archive
+
+5. Amazon S3 objects are automatically replicated on multiple devices in multiple facilities within a region.
+
+6. If your request rate grows steadily, Amazon S3 automatically partitions buckets to support very high request rates and simultaneous access by many clients. 
+
+7. Bucket names are global. This means that your bucket names must be unique across all AWS accounts, much like Domain Name System (DNS) domain names, not just within your own account. Bucket names can contain up to 63 lowercase letters, numbers, hyphens, and periods. You can create and use multiple buckets; you can have up to 100 per account by default. 
+
+8. An object can store virtually any kind of data in any format. Objects can range in size from 0 bytes up to 5TB, and a single bucket can store an unlimited number of objects. This means that Amazon S3 can store a virtually unlimited amount of data. 
+
+9. A key may contain delimiter characters like slashes or backslashes to help you name and logically organize your Amazon S3 objects, but to Amazon S3 it is simply a long key name in a flat namespace. There is no actual file and folder hierarchy.
+
+10. Amazon S3 standard storage is designed for 99.999999999% durability and 99.99% availability of objects over a given year.
+
+11. Amazon S3 Standard – Infrequent Access (Standard-IA) offers the same durability, low latency, and high throughput as Amazon S3 Standard, but is designed for long-lived, less frequently accessed data. 
+
+12. data. Standard-IA has a lower per GB-month storage cost than Standard, but the price model also includes a minimum object size (128KB), minimum duration (30 days), and per-GB retrieval costs, so it is best suited for infrequently accessed data that is stored for longer than 30 days. 
+
+13. Amazon S3 Reduced Redundancy Storage (RRS) offers slightly lower durability (4 nines) than Standard or Standard-IA at a reduced cost. It is most appropriate for derived data that can be easily reproduced, such as image thumbnails. 
+
+14. To encrypt your Amazon S3 data at rest, you can use several variations of Server-Side Encryption (SSE) . Amazon S3 encrypts your data at the object level as it writes it to disks in its data centers and decrypts it for you when you access it. All SSE performed by Amazon S3 and AWS Key Management Service (Amazon KMS) uses the 256-bit Advanced Encryption Standard (AES). You can also encrypt your Amazon S3 data at rest using Client-Side Encryption , encrypting your data on the client before sending it to Amazon S3. 
+
+15. Versioning is turned on at the bucket level. Once enabled, versioning cannot be removed from a bucket; it can only be suspended. 
+
+16. In general,
+    a) You should use multipart upload for objects larger than 100 Mbytes,
+    b) Must use multipart upload for objects larger than 5GB. 
+
+17. Notification messages can be sent through either Amazon Simple Notification Service (Amazon SNS) or Amazon Simple Queue Service (Amazon SQS) or delivered directly to AWS Lambda to invoke AWS Lambda functions. 
+
+18. Amazon S3 is eventually consistent, but offers read-after-write consistency for new object PUT s. 
+
+19. Amazon S3 objects are private by default, accessible only to the owner. Objects can be marked public readable to make them accessible on the web. Controlled access may be provided to others using ACLs and AWS IAM and Amazon S3 bucket policies. 
+
+20. Object lifecycle management policies can be used to automatically move data between storage classes based on time. 
+
+21. Versioning and MFA Delete can be used to protect against accidental deletion. 
+
+22. Pre-signed URLs grant time-limited permission to download objects and can be used to protect media and other web content from unauthorized “web scraping.” 
+
+
+====================================================================================================
+                                Limitations and Restrictions
+====================================================================================================
+
+1. Max buckets per account: 100 (Can be increased by contacting amazon)
+
+2. Bucket naming conventions
+    a) 3 - 63 Characters
+    b) Only contains lowercase letters, numbers, periods and hyphens
+    c) Starts with a letter or number
+    d) Periods and hyphens can not follow each other
+    e) Must not be an IP address format
+    f) Bucket names must be a series of one or more labels. Each label must start and end with a lowercase letter or a number.
+
+3. Bucket ownership is not transferable; however, if a bucket is empty, you can delete it. After a bucket is deleted, the name becomes available to reuse, but the name might not be available for you to reuse for various reasons. For example, some other account could create a bucket with that name. Note, too, that it might take some time before the name can be reused. So if you want to use the same bucket name, don't delete the bucket.
+
+4. After you have created a bucket, you can't change its Region.
+
+5. You cannot create a bucket within another bucket.
+
+6. The high-availability engineering of Amazon S3 is focused on get, put, list, and delete operations.
+
+====================================================================================================
+                                Data Consistency
+====================================================================================================
+
+
+1. Amazon S3 offers eventual consistency for overwrite PUTS and DELETES in all regions.
+
+2. Updates to a single key are atomic. For example, if you PUT to an existing key, a subsequent read might return the old data or the updated data, but it will never return corrupted or partial data.
+
+3. Amazon S3 achieves high availability by replicating data across multiple servers within Amazon's data centers. If a PUT request is successful, your data is safely stored. However, information about the changes must replicate across Amazon S3, which can take some time, and so you might observe the following behaviors:
+
+    a) A process writes a new object to Amazon S3 and immediately lists keys within its bucket. Until the change is fully propagated, the object might not appear in the list.
+
+    b) A process replaces an existing object and immediately attempts to read it. Until the change is fully propagated, Amazon S3 might return the prior data.
+
+    c) A process deletes an existing object and immediately attempts to read it. Until the deletion is fully propagated, Amazon S3 might return the deleted data.
+
+    d) A process deletes an existing object and immediately lists keys within its bucket. Until the deletion is fully propagated, Amazon S3 might list the deleted object.
+
+====================================================================================================
+                                Cross-Region Replication
+====================================================================================================
+
+1. Cross-region replication (CRR) enables automatic, asynchronous copying of objects across buckets in different AWS Regions. Buckets configured for cross-region replication can be owned by the same AWS account or by different accounts.
+
+2. Minimum Configuration:
+    a) The destination bucket, where you want Amazon S3 to replicate objects
+    b) An AWS IAM role that Amazon S3 can assume to replicate objects on your behalf
+
+3. Cross-region replication requires the following:
+
+    a) Both source and destination buckets must have versioning enabled.
+    b) The source and destination buckets must be in different AWS Regions.
+    c) Amazon S3 must have permissions to replicate objects from the source bucket to the destination bucket on your behalf.
+    d) If the owner of the source bucket doesn't own the object in the bucket, the object owner must grant the bucket owner READ and READ_ACP permissions with the object ACL.

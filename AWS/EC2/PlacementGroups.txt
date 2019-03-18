@@ -1,0 +1,20 @@
+1. A placement group is a logical grouping of instances within a single Availability Zone. 
+
+2. You can launch or start instances in a placement group, which determines how instances are placed on underlying hardware.
+
+3. When you create a placement group, you specify one of the following strategies for the group:
+    a) Cluster: clusters instances into a low-latency group in a single Availability Zone
+    b) Partition: spreads instances across logical partitions, ensuring that instances in one partition do not share underlying hardware with instances in other partitions
+    c) Spread: spreads instances across underlying hardware
+
+4. The name you specify for a placement group must be unique within your AWS account for the Region.
+
+5. You can't merge placement groups.
+
+6. An instance can be launched in one placement group at a time; it cannot span multiple placement groups.
+
+7. Reserved Instances provide a capacity reservation for EC2 instances in a specific Availability Zone. The capacity reservation can be used by instances in a placement group. However, it is not possible to explicitly reserve capacity for a placement group.
+
+8. Instances with a tenancy of host cannot be launched in placement groups.
+
+9. For instances that are enabled for enhanced networking, traffic between instances within the same Region that is addressed using IPv4 or IPv6 addresses can use up to 5 Gbps for single-flow traffic and up to 25 Gbps for multi-flow traffic. A flow represents a single, point-to-point network connection.

@@ -1,0 +1,39 @@
+===================
+ Instance Metadata
+===================
+
+1. Instance metadata is data about your instance that you can use to configure or manage the running instance.
+
+2. Although you can only access instance metadata and user data from within the instance itself, the data is not protected by cryptographic methods. Anyone who can access the instance can view its metadata. Therefore, you should take suitable precautions to protect sensitive data (such as long-lived encryption keys). You should not store sensitive data, such as passwords, as user data.
+
+3. Because your instance metadata is available from your running instance, you do not need to use the Amazon EC2 console or the AWS CLI.
+
+4. Examples:
+    a) curl http://169.254.169.254/latest/meta-data/
+    b) curl http://169.254.169.254/latest/meta-data/public-hostname
+
+5. You are not billed for HTTP requests used to retrieve instance metadata and user data.
+
+6. Instance metadata includes a wide variety of attributes, including:
+    a) The associated security groups
+    b) The instance ID
+    c) The instance type
+    d) The AMI used to launch the instance 
+
+===================
+ Instance User Data
+===================
+
+7. User data is treated as opaque data: what you give is what you get back. It is up to the instance to be able to interpret it.
+
+8. User data is limited to 16 KB. This limit applies to the data in raw form, not base64-encoded form.
+
+9. User data must be base64-encoded. The Amazon EC2 console can perform the base64 encoding for you or accept base64-encoded input.
+
+10. User data must be decoded when you retrieve it. The data is decoded when you retrieve it using instance metadata and the console.
+
+11. If you stop an instance, modify its user data, and start the instance, the updated user data is not executed when you start the instance.
+
+12. Example: http://169.254.169.254/latest/user-data
+
+13. You need to put an instance into stop state, if you want to modify the functions(InstanceType/Userdata) of the instance.
